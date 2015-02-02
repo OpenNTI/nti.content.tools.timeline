@@ -1,8 +1,11 @@
 {
-  "name": "",
-  "version": "0.0.0",
-  "description": "",
+  "name": "timeline-json-extractor",
+  "version": "0.0.1",
+  "description": "Utility that converts TimelineJS google doc spreadsheets into TimelineJS JSON files.",
   "main": "index.js",
+  "bin": {
+      "timeline-json-extractor": "bin/timeline-json-extractor"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +13,7 @@
     "type": "git",
     "url": "ssh://repos.nextthought.com/nti..."
   },
-  "author": "",
+  "author": "NextThought",
   "license": "ISC",
   "dependencies": {
     "es6-promise": "^1.0.0",
