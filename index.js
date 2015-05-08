@@ -1,6 +1,6 @@
 'use strict';
 
-var defaultWorksheet = 'od6';
+var defaultWorksheet = 'default';
 var googleFeedURLPattern = 'https://spreadsheets.google.com/feeds/{target}/{key}/{worksheet}/public/values?alt=json';
 var sheetsPattern = /docs\.google\.com\/.*spreadsheets\/d\/([^\/]+)/;
 
