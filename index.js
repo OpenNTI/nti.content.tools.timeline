@@ -8,6 +8,7 @@ var fs = require('fs');
 var get = require('./lib/get');
 var googleDataParser = require('./lib/buildData');
 var QueryString = require('query-string');
+var Promise = global.Promise || require('es6-promise').Promise;
 
 var opt = require('optimist')
 	.usage('Get TimelineJS JSON')
@@ -44,26 +45,34 @@ var url = googleFeedURLPattern
 
 
 
-var parse = get(url).then(function(data) {
+var parse = get(url).then(
+	function(data) {
 
-	var d = googleDataParser.buildDataFromList(data);
+		var d = googleDataParser.buildDataFromList(data);
 
-	if (d === null) {
-		url = googleFeedURLPattern
-			.replace('{target}', 'cells')
-			.replace('{key}', key)
-			.replace('{worksheet}', worksheet);
+		if (d === null) {
+			url = googleFeedURLPattern
+				.replace('{target}', 'cells')
+				.replace('{key}', key)
+				.replace('{worksheet}', worksheet);
 
-		return get(url).then(function(data) {
-				return googleDataParser.buildDataFromCells(data);
-			});
-	}
+			return get(url).then(function(data) {
+					return googleDataParser.buildDataFromCells(data);
+				});
+		}
 
-	return d;
+		return d;
 
-});
+	},
+	function getError(reason) {
+		console.log('GET request failed (HTTP %s): %s', reason.statusCode, reason.body, reason.responseJSON || '');
+		return Promise.reject('Could not load data from google');
+	});
 
 
 parse.then(function(timelineData) {
 	fs.writeFileSync(opt.output, JSON.stringify(timelineData, null, 4));
+})
+.catch(function(error) {
+	console.error(error.stack || error.message || error);
 });
