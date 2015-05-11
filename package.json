@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://repos.nextthought.com/nti..."
+    "url": "https://repos.nextthought.com/git/nti.content.tools.timeline"
   },
   "author": "NextThought",
   "license": "ISC",
