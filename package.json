@@ -4,7 +4,7 @@
   "description": "Utility that converts TimelineJS google doc spreadsheets into TimelineJS JSON files.",
   "main": "index.js",
   "bin": {
-      "timeline-json-extractor": "bin/timeline-json-extractor"
+      "timeline-json-extractor": "index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
